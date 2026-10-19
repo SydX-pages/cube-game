@@ -1,0 +1,342 @@
+:root {
+  --bg: #1f1f1f;
+  --surface: #272727;
+  --line: #3d3d3d;
+  --text: #f3f3f3;
+  --dim: #a0a0a0;
+  --accent: #0078d4;
+  --accent-hover: #1a86d9;
+  --accent-ink: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-size: var(--fs, 15px);
+}
+
+/* 3D 画布 */
+.cube-view {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cube-view canvas {
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+
+.cube-view canvas:active {
+  cursor: grabbing;
+}
+
+/* 标题 */
+.app-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 264px;
+  padding: 22px 18px 0;
+  pointer-events: none;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.05em;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.app-header h1 span {
+  color: var(--accent);
+}
+
+/* 侧栏 */
+.utils {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 264px;
+  padding: 58px 18px 18px;
+  overflow-y: auto;
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+}
+
+.utils::-webkit-scrollbar {
+  width: 8px;
+}
+
+.utils::-webkit-scrollbar-thumb {
+  background: var(--line);
+}
+
+/* 分组：靠分隔线而非卡片 */
+.panel {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.panel:last-child {
+  border-bottom: none;
+}
+
+.panel h2 {
+  margin: 0 0 10px;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--dim);
+}
+
+/* 按钮 */
+.orders,
+.modes,
+.directions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  flex: 1 1 auto;
+  padding: 7px 10px;
+  font-size: 0.9em;
+  font-family: inherit;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--dim);
+}
+
+.chip.active {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.chip.active:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.directions {
+  margin-top: 8px;
+}
+
+/* 自定义阶数输入框 */
+.order-input {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.order-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 9px;
+  font-size: 0.9em;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.order-input input::placeholder {
+  color: var(--dim);
+}
+
+.order-input input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.order-input .chip {
+  flex: 0 0 auto;
+}
+
+/* 当前层信息 */
+.layer-info {
+  margin: 12px 0 0;
+  font-size: 0.9em;
+  color: var(--dim);
+}
+
+.layer-badge {
+  color: var(--text);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-weight: 600;
+}
+
+.layer-badge.empty {
+  color: var(--dim);
+  font-weight: 400;
+}
+
+.hint {
+  margin: 8px 0 0;
+  font-size: 0.8em;
+  line-height: 1.5;
+  color: var(--dim);
+}
+
+/* 开关 */
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+.switch + .switch {
+  margin-top: 10px;
+}
+
+.switch input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.placeholder {
+  margin: 10px 0 0;
+  font-size: 0.8em;
+  line-height: 1.5;
+  color: var(--dim);
+}
+
+.field-label {
+  margin: 16px 0 8px;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--dim);
+}
+
+/* 操作说明 */
+.helper ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.helper li {
+  font-size: 0.9em;
+  line-height: 1.8;
+  color: var(--dim);
+}
+
+kbd {
+  padding: 0 4px;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.82em;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+}
+
+/* 手势识别 */
+.gesture {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 3;
+  width: 220px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.gesture video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #000;
+  transform: scaleX(-1);
+}
+
+.gesture-result {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 10px;
+  border-top: 1px solid var(--line);
+}
+
+.gesture-name {
+  font-size: 0.95em;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.gesture-score {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.8em;
+  color: var(--dim);
+}
+
+.gesture-empty {
+  font-size: 0.85em;
+  color: var(--dim);
+}
+
+/* 响应式 */
+@media (max-width: 640px) {
+  .utils {
+    width: 200px;
+    padding: 52px 13px 13px;
+  }
+
+  .app-header {
+    width: 200px;
+    padding: 18px 13px 0;
+  }
+
+  .gesture {
+    right: 12px;
+    bottom: 12px;
+    width: 160px;
+  }
+}
