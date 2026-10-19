@@ -27,6 +27,7 @@ const Gesture = ({ onGesture }) => {
   const [score, setScore] = useState(0);
   const [error, setError] = useState(null);
   const [ready, setReady] = useState(false);
+  const [diag, setDiag] = useState("");
 
   useEffect(() => {
     onGestureRef.current = onGesture;
@@ -107,6 +108,13 @@ const Gesture = ({ onGesture }) => {
       const TRIGGER_INTERVAL = 1000; // 手势操作的最小触发间隔(ms)
       let lastDetect = 0;
       let lastActionTime = 0;
+      let lastProbe = 0;
+
+      // 用来检查 <video> 当前帧是否真的能被画进 canvas（黑帧检测）
+      const probe = document.createElement("canvas");
+      probe.width = 32;
+      probe.height = 24;
+      const probeCtx = probe.getContext("2d", { willReadFrequently: true });
 
       const detect = (now) => {
         if (cancelled) return;
@@ -125,6 +133,28 @@ const Gesture = ({ onGesture }) => {
             setName(category);
             setScore(gesture ? gesture.score : 0);
 
+            if (category) setDiag("");
+
+            // 每秒抽查一次画面：若 <video> 画到 canvas 是黑的，识别器就拿不到帧
+            if (now - lastProbe >= 1000 && probeCtx) {
+              lastProbe = now;
+              probeCtx.drawImage(video, 0, 0, probe.width, probe.height);
+              const data = probeCtx.getImageData(
+                0,
+                0,
+                probe.width,
+                probe.height,
+              ).data;
+              let sum = 0;
+              for (let i = 0; i < data.length; i += 4) {
+                sum += data[i] + data[i + 1] + data[i + 2];
+              }
+              const luma = sum / (data.length / 4) / 3;
+              if (luma < 2) {
+                setDiag("视频帧为黑帧，识别器取不到画面");
+              }
+            }
+
             // 手势 -> 操作：间隔限流，任意两次触发至少相隔 TRIGGER_INTERVAL
             if (
               category &&
@@ -137,7 +167,9 @@ const Gesture = ({ onGesture }) => {
                 onGestureRef.current?.(category);
               }
             }
-          } catch {}
+          } catch (e) {
+            setDiag(`识别异常：${e?.message ?? e}`);
+          }
         }
 
         raf = requestAnimationFrame(detect);
@@ -173,7 +205,7 @@ const Gesture = ({ onGesture }) => {
             <span className="gesture-score">{(score * 100).toFixed(0)}%</span>
           </>
         ) : (
-          <span className="gesture-empty">未检测到手势</span>
+          <span className="gesture-empty">{diag || "未检测到手势"}</span>
         )}
       </div>
     </div>
