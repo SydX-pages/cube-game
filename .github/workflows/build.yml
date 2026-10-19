@@ -102,7 +102,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install frontend dependencies
-        run: npm ci
+        run: npm ci --registry=https://registry.npmmirror.com --allow-remote=all
 
       - name: Build AppImage
         env:
