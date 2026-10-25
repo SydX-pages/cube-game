@@ -38,8 +38,12 @@
   gap: 8px;
 }
 
-.custom-order input {
+.custom-order button {
   flex: 1;
+}
+
+.custom-order input {
+  flex: 4;
   min-width: 0;
   padding: 9px 11px;
   font-size: 13px;
@@ -60,10 +64,4 @@
 .custom-order input:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(91, 140, 255, 0.15);
-}
-
-.custom-order input::-webkit-outer-spin-button,
-.custom-order input::-webkit-inner-spin-button {
-  margin: 0;
-  -webkit-appearance: none;
 }
