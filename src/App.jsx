@@ -15,13 +15,13 @@ const App = () => {
     const cube = cubeRef.current;
     if (!cube) return;
 
-    if (name === "Pointing_Up") {
+    if (name === "Closed_Fist") {
       cube.transMode("view");
       cube.selectClear();
-    } else if (name === "Victory") {
+    } else if (name === "Open_Palm") {
       cube.transMode("rotate");
-    } else if (name === "Thumb_Up" || name === "Thumb_Down") {
-      const direction = name === "Thumb_Up" ? 1 : -1;
+    } else if (name === "Pointing_Up" || name === "Victory") {
+      const direction = name === "Pointing_Up" ? 1 : -1;
       if (cube.mode === "view") cube.select(direction);
       else cube.rotate(direction);
     }
@@ -41,11 +41,11 @@ const App = () => {
       />
       <main className="stage">
         <CubeView
-        order={order}
-        cubeRef={cubeRef}
-        showAxes={showAxes}
-        onModeChange={setMode}
-      />
+          order={order}
+          cubeRef={cubeRef}
+          showAxes={showAxes}
+          onModeChange={setMode}
+        />
         {showGes && <Gesture onGesture={handleGesture} />}
       </main>
     </div>

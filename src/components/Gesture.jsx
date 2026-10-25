@@ -16,8 +16,8 @@ const LABELS = {
 const ACTIONABLE = new Set([
   "Pointing_Up",
   "Victory",
-  "Thumb_Up",
-  "Thumb_Down",
+  "Closed_Fist",
+  "Open_Palm",
 ]);
 
 const Gesture = ({ onGesture }) => {

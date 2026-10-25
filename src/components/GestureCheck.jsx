@@ -11,10 +11,10 @@ const GestureCheck = ({ showGes, setShowGes }) => (
     </label>
     {showGes && (
       <ul className="gesture-guide">
-        <li>数字1：观察模式</li>
-        <li>数字2：旋转模式</li>
-        <li>大拇指向上：正向选择/旋转</li>
-        <li>大拇指向下：负向选择/旋转</li>
+        <li>握拳：观察模式</li>
+        <li>张开手掌：旋转模式</li>
+        <li>数字1：正向选择/旋转</li>
+        <li>数字2：负向选择/旋转</li>
       </ul>
     )}
   </div>
