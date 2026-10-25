@@ -8,6 +8,7 @@ import "../style/SideBar.css";
 const SideBar = ({
   order,
   setOrder,
+  mode,
   cubeRef,
   showAxes,
   setShowAxes,
@@ -26,7 +27,7 @@ const SideBar = ({
 
       <div className="sidebar-sections">
         <OrderSetter order={order} setOrder={setOrder} />
-        <ModeBtn cubeRef={cubeRef} />
+        <ModeBtn cubeRef={cubeRef} mode={mode} />
 
         <section className="panel">
           <h2 className="panel-title">显示选项</h2>

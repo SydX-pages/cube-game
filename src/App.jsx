@@ -9,16 +9,17 @@ const App = () => {
   const [order, setOrder] = useState(2);
   const [showAxes, setShowAxes] = useState(false);
   const [showGes, setShowGes] = useState(false);
+  const [mode, setMode] = useState("view");
 
   const handleGesture = (name) => {
     const cube = cubeRef.current;
     if (!cube) return;
 
     if (name === "Pointing_Up") {
-      cube.mode = "view";
+      cube.transMode("view");
       cube.selectClear();
     } else if (name === "Victory") {
-      cube.mode = "rotate";
+      cube.transMode("rotate");
     } else if (name === "Thumb_Up" || name === "Thumb_Down") {
       const direction = name === "Thumb_Up" ? 1 : -1;
       if (cube.mode === "view") cube.select(direction);
@@ -31,6 +32,7 @@ const App = () => {
       <SideBar
         order={order}
         setOrder={setOrder}
+        mode={mode}
         cubeRef={cubeRef}
         showAxes={showAxes}
         setShowAxes={setShowAxes}
@@ -38,7 +40,12 @@ const App = () => {
         setShowGes={setShowGes}
       />
       <main className="stage">
-        <CubeView order={order} cubeRef={cubeRef} showAxes={showAxes} />
+        <CubeView
+        order={order}
+        cubeRef={cubeRef}
+        showAxes={showAxes}
+        onModeChange={setMode}
+      />
         {showGes && <Gesture onGesture={handleGesture} />}
       </main>
     </div>

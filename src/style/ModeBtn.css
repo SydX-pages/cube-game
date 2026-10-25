@@ -3,6 +3,14 @@
   gap: 8px;
 }
 
-.btn .active {
-  color: var(--accent-2);
+.btn-row .btn.active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(91, 140, 255, 0.35);
+}
+
+.btn-row .btn.active:hover {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent;
 }

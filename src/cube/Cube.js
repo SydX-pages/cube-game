@@ -22,6 +22,7 @@ export class Cube {
     this.cubeSpace = 0.1;
     this.cubeLen = this.cubeSize + this.cubeSpace;
     this.mode = "view";
+    this.onModeChange = null;
     this.selected = 0;
 
     this.layer = this.genLayer();
@@ -213,6 +214,7 @@ export class Cube {
 
   transMode = (mCode) => {
     this.mode = mCode;
+    this.onModeChange?.(mCode);
   };
 
   step = (direction) => {

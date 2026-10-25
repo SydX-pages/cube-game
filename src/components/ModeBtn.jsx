@@ -1,20 +1,20 @@
 import "../style/ModeBtn.css";
 
-const ModeBtn = ({ cubeRef }) => {
+const ModeBtn = ({ cubeRef, mode }) => {
   return (
     <section className="panel">
       <h2 className="panel-title">操作模式</h2>
       <div className="btn-row">
         <button
           type="button"
-          className={cubeRef.current?.mode === "view" ? "btn active" : "btn"}
+          className={mode === "view" ? "btn active" : "btn"}
           onClick={() => cubeRef.current?.transMode("view")}
         >
           观察模式
         </button>
         <button
           type="button"
-          className={cubeRef.current?.mode === "rotate" ? "btn active" : "btn"}
+          className={mode === "rotate" ? "btn active" : "btn"}
           onClick={() => cubeRef.current?.transMode("rotate")}
         >
           旋转模式
