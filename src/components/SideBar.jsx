@@ -21,7 +21,6 @@ const SideBar = ({
         <div className="brand-mark" aria-hidden="true" />
         <div>
           <h1>Cube Game</h1>
-          <p>空间魔方实验室</p>
         </div>
       </header>
 

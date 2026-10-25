@@ -9,13 +9,8 @@
   height: 100%;
   padding: 26px 20px 24px;
   overflow-y: auto;
-  background: linear-gradient(
-    180deg,
-    rgba(20, 24, 34, 0.92) 0%,
-    rgba(12, 15, 22, 0.95) 100%
-  );
+  background: var(--surface);
   border-right: 1px solid var(--panel-border);
-  backdrop-filter: blur(18px);
 }
 
 .sidebar::-webkit-scrollbar {
@@ -23,7 +18,7 @@
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: #3a3d43;
   border-radius: 999px;
 }
 
@@ -41,23 +36,16 @@
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 12px;
-  background: conic-gradient(
-    from 210deg,
-    var(--accent),
-    var(--accent-2),
-    #ff4f9a,
-    var(--accent)
-  );
-  box-shadow: 0 10px 30px rgba(91, 140, 255, 0.35);
+  background: var(--accent);
+  border-radius: 10px;
 }
 
 .brand-mark::after {
   width: 19px;
   height: 19px;
   content: "";
-  background: #0b0d12;
-  border-radius: 5px;
+  background: var(--surface);
+  border-radius: 4px;
 }
 
 .sidebar-header h1 {
@@ -84,7 +72,35 @@
 .switch-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
+}
+
+.switch-item {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.option-hint {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.gesture-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 18px;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.gesture-guide li::marker {
+  color: var(--accent);
 }
 
 @media (max-width: 900px) {
