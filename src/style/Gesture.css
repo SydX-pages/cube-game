@@ -1,0 +1,48 @@
+.gesture {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10;
+  width: 280px;
+  overflow: hidden;
+  background: rgba(12, 15, 22, 0.9);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(16px);
+}
+
+.gesture video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #000;
+  transform: scaleX(-1);
+}
+
+.gesture-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  border-top: 1px solid var(--panel-border);
+}
+
+.gesture-name {
+  font-weight: 600;
+  color: #fff;
+}
+
+.gesture-score {
+  font-size: 12px;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.gesture-empty {
+  font-size: 12px;
+  color: var(--muted);
+}

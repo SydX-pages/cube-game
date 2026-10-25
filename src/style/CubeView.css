@@ -1,0 +1,25 @@
+.cube-view {
+  position: relative;
+  z-index: 1;
+  width: min(74vh, 100%);
+  max-width: 100%;
+  aspect-ratio: 1;
+}
+
+.cube-view canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  cursor: grab;
+  touch-action: none;
+}
+
+.cube-view canvas:active {
+  cursor: grabbing;
+}
+
+@media (max-width: 900px) {
+  .cube-view {
+    width: min(70vh, 100%);
+  }
+}
