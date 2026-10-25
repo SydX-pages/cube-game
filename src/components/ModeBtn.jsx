@@ -7,14 +7,14 @@ const ModeBtn = ({ cubeRef }) => {
       <div className="btn-row">
         <button
           type="button"
-          className="btn"
+          className={cubeRef.current?.mode === "view" ? "btn active" : "btn"}
           onClick={() => cubeRef.current?.transMode("view")}
         >
           观察模式
         </button>
         <button
           type="button"
-          className="btn"
+          className={cubeRef.current?.mode === "rotate" ? "btn active" : "btn"}
           onClick={() => cubeRef.current?.transMode("rotate")}
         >
           旋转模式

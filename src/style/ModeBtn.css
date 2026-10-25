@@ -2,3 +2,7 @@
   display: flex;
   gap: 8px;
 }
+
+.btn .active {
+  color: var(--accent-2);
+}
